@@ -1,0 +1,10 @@
+# Logs
+.idea
+logs
+*.log
+
+
+# Coverage directory used by tools like istanbul
+coverage
+
+node_modules
