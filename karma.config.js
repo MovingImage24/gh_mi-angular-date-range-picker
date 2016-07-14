@@ -8,8 +8,8 @@ module.exports = function (karma) {
     files: [
       'node_modules/angular/angular.js',
       'node_modules/angular-mocks/angular-mocks.js',
-      'src/index.js',
-      'test/**/*Spec.js'
+      'src/index.ts',
+      'test/**/*Spec.ts'
     ],
 
     reporters: ['progress', 'coverage', 'coveralls'],
@@ -22,20 +22,30 @@ module.exports = function (karma) {
       ]
     },
     preprocessors: {
-      'test/**/*Spec.js': ['webpack'],
-      'src/index.js': ['webpack']
+      'test/**/*Spec.ts': ['webpack'],
+      'src/index.ts': ['webpack']
     },
 
     browsers: ['PhantomJS'],
 
     logLevel: karma.LOG_INFO,
 
-    singleRun: true,
+    singleRun: false,
 
     webpack: {
+      resolve: {
+        extensions: ['', '.js', '.ts']
+      },
       module: {
+        loaders: [
+          {
+            test: /\.ts$/,
+            exclude: 'node_modules',
+            loaders: ['awesome-typescript-loader']
+          }
+        ],
         postLoaders: [{ // << add subject as webpack's postloader
-          test: /\.js$/,
+          test: /\.ts$/,
           exclude: /(test|node_modules)\//,
           loader: 'istanbul-instrumenter'
         }]

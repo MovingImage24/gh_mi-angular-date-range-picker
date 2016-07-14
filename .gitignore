@@ -8,3 +8,4 @@ logs
 coverage
 
 node_modules
+typings

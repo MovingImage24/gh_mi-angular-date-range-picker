@@ -18,10 +18,10 @@ $ npm i mi-angular-date-range-picker --save
 ```sh
 # app.js
 require('angular-bootstrap');
-require('mi-angular-alert-service');
+require('mi-angular-date-range-picker');
 var requires = [
   'ui.bootstrap',
-  'mi.AlertService'
+  'mi.DateRangePicker'
 ];
 angular.module('sample-app', requires);
 angular.bootstrap(document, ['sample-app']);
