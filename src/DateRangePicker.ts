@@ -12,6 +12,7 @@ class DateRangePickerController {
     public endDate:Date;
     public maxDate:Date;
     public onClose:Function;
+    public onToggle:Function;
     public toUpdate:boolean;
     public opened:boolean;
     public formattedRange:string;
@@ -28,6 +29,10 @@ class DateRangePickerController {
     }
 
     public toggled(open:boolean) {
+        if (this.onToggle) {
+            this.onToggle({isOpen: open});
+        }
+
         if (open === false) {
             this.endDate.setHours(23,59,59,0);
             this.startDate.setHours(0,0,0,0);
@@ -84,7 +89,8 @@ export = {
         startDate: '<',
         endDate: '<',
         maxDate: '<',
-        onClose: '&'
+        onClose: '&',
+        onToggle: '&?',
     },
     template: `
 <div class="date-range-picker pull-right" uib-dropdown on-toggle="dateRangePickerVm.toggled(open)" is-open="dateRangePickerVm.opened">

@@ -102,6 +102,31 @@ describe('Shared:Component:DateRangePicker', function () {
     expect(this.oncloseMock).toHaveBeenCalledWith({updated: true, startDate: this.now, endDate: this.yesterday});
   });
 
+  it('"toggled" should call on close method with updated true and change formattedRange if endDate changed', function () {
+    let onToggleMock = jasmine.createSpy('onToggleMock');
+
+    let component = this.$componentController('dateRangePicker', {$scope: this.scope, moment: moment}, {
+      startDate: angular.copy(this.now),
+      endDate: angular.copy(this.now),
+      onClose: this.oncloseMock,
+      onToggle: onToggleMock
+    });
+
+    component.$onInit();
+
+    component.endDate = angular.copy(this.yesterday);
+    component.update(angular.copy(this.yesterday), 'endDate');
+
+    component.toggled(false);
+    expect(component.formattedRange).toEqual(createStartEndDateString(this.now, this.yesterday));
+
+    this.yesterday.setHours(23, 59, 59, 0);
+    this.now.setHours(0, 0, 0, 0);
+
+    expect(onToggleMock).toHaveBeenCalledWith({isOpen: false});
+    expect(this.oncloseMock).toHaveBeenCalledWith({updated: true, startDate: this.now, endDate: this.yesterday});
+  });
+
   function createStartEndDateString(start, end) {
     function createDateString(date) {
       return [
