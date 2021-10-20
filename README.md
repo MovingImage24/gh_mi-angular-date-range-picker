@@ -1,3 +1,7 @@
+**This repository is deprecated!**
+
+The relevant repository can be found here [mi-angular-date-range-picker](https://github.com/movingimage-evp/mi-angular-date-range-picker)
+
 # mi-angular-date-range-picker
 
 > Date Range Picker for AngularJS.
